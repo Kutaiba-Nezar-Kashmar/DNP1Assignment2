@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyBlazorWebApp", "Famil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FamilyWepApi", "FamilyWepApi\FamilyWepApi.csproj", "{D76B691F-F8AF-423F-8448-AF167DCE7CF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FamilyWebAPI", "FamilyWebAPI", "{3ACBBE10-9119-49A1-B447-03479B3FB7B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{67E0ED71-D644-4F90-A731-E7AA27BE9F45} = {E5693BAE-79A3-4CC5-BE60-89188EC9721F}
-		{D76B691F-F8AF-423F-8448-AF167DCE7CF2} = {E5693BAE-79A3-4CC5-BE60-89188EC9721F}
+		{D76B691F-F8AF-423F-8448-AF167DCE7CF2} = {3ACBBE10-9119-49A1-B447-03479B3FB7B8}
 	EndGlobalSection
 EndGlobal

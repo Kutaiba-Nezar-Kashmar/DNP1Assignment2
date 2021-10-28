@@ -44,7 +44,7 @@ namespace FamilyBlazorWebApp.Authentication
         return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
     }
 
-    public void ValidateLogin(string username, string password) 
+    public async Task ValidateLogin(string username, string password) 
     {
         Console.WriteLine("Validating log in");
         if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
@@ -53,7 +53,8 @@ namespace FamilyBlazorWebApp.Authentication
         ClaimsIdentity identity = new ClaimsIdentity();
         try 
         {
-            User user = userService.ValidateUser(username, password);
+            //changed the method to asyn task and add await below
+            User user = await userService.ValidateUser(username, password);
             identity = SetupClaimsForUser(user);
             string serialisedData = JsonSerializer.Serialize(user);
             jsRuntime.InvokeVoidAsync("sessionStorage.setItem", "currentUser", serialisedData);

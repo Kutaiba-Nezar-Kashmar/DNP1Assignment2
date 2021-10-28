@@ -111,7 +111,7 @@
     
     protected override async Task OnInitializedAsync()
     {
-        allAdults = AdultData.GetAdults();
+        allAdults = await AdultData.GetAdults();
         adultsToShow = allAdults;
     }
 
@@ -228,10 +228,10 @@
         NavigationManager.NavigateTo($"Edit/{id}");
     }
 
-    private void RemoveAdult(int adultId)
+    private async Task RemoveAdult(int adultId)
     {
         Adult adultToRemove = allAdults.First(a => a.Id == adultId);
-        AdultData.RemoveAdult(adultId);
+        await AdultData.RemoveAdult(adultId);
         allAdults.Remove(adultToRemove);
         adultsToShow.Remove(adultToRemove);
     }

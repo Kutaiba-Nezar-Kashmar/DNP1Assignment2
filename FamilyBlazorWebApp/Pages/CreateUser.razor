@@ -43,9 +43,9 @@
     
     private User newUser = new User();
 
-    private void createUser()
+    private async Task createUser()
     {
-        UserService.CreateUser(newUser);
+        await UserService.CreateUser(newUser);
         message = "User created. Please login to use the system";
     }
 

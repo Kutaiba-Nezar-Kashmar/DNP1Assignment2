@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FamilyBlazorWebApp.Models;
 
 namespace FamilyBlazorWebApp.Data
 {
     public interface IAdultData
     {
-        IList<Adult> GetAdults();
-        void AddAdult(Adult adult);
-        void RemoveAdult(int adultId);
-        void UpdateAdult(Adult adult);
-        Adult Get(int adultId);
+        Task<IList<Adult>> GetAdults();
+        Task AddAdult(Adult adult);
+        Task RemoveAdult(int adultId);
+        Task UpdateAdult(Adult adult);
+        Task<Adult> Get(int adultId);
     }
 }

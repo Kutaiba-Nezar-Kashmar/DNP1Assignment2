@@ -36,5 +36,20 @@ namespace FamilyWepApi.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult<User>> ValidateUser([FromQuery] string username, [FromQuery] string password)
+        {
+            try
+            {
+                User user = await userData.ValidateUser(username, password);
+                return Ok(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

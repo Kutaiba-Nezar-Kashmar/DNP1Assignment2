@@ -76,12 +76,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        adultToEdit = AdultData.Get(Id);
+        adultToEdit = await AdultData.Get(Id);
     }
 
-    private void Save()
+    private async Task Save()
     {
-        AdultData.UpdateAdult(adultToEdit);
+        await AdultData.UpdateAdult(adultToEdit);
         NavigationManager.NavigateTo("/Adults");
     }
 }

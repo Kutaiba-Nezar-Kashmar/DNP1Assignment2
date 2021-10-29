@@ -20,13 +20,13 @@ namespace FamilyWepApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IList<Adult>>> GetAdults(/*[FromQuery] int? id, [FromQuery] string? name, [FromQuery] string? hairColor, [FromQuery] string? eyeColor, [FromQuery] string? sex, [FromQuery] int? age*/)
+        public async Task<ActionResult<IList<Adult>>> GetAdults([FromQuery] int? id, [FromQuery] string? name, [FromQuery] string? hairColor, [FromQuery] string? eyeColor, [FromQuery] string? sex, [FromQuery] int? age)
         {
             try
             {
                 IList<Adult> adults = await adultData.GetAdults();
-                //ActionResult<IList<Adult>> adultsToShow = new List<Adult>();
-                /*if (id != null)
+                ActionResult<IList<Adult>> adultsToShow = new List<Adult>();
+                if (id != null)
                 {
                     adultsToShow = adults.Where(a => a.Id == id).ToList();
                     return adultsToShow;
@@ -55,12 +55,13 @@ namespace FamilyWepApi.Controllers
                 {
                     adultsToShow = adults.Where(a => a.Age == age).ToList();
                     return adultsToShow;
-                }*/
-                // else
-                //{
-                return Ok(adults);
+                }
+                else
+                {
+                    return Ok(adults);
                 
                     
+                }
             }
             catch (Exception e)
             {

@@ -158,7 +158,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        familyMembersToShow = FamilyData.Get(Id);
+        familyMembersToShow = await FamilyData.Get(Id);
         adults = familyMembersToShow.Adults;
         children = familyMembersToShow.Children;
         pets = familyMembersToShow.Pets;

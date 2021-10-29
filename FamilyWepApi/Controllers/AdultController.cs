@@ -12,7 +12,7 @@ namespace FamilyWepApi.Controllers
     [Route("[controller]")]
     public class AdultController : ControllerBase
     {
-        private IAdultData adultData;
+        private readonly IAdultData adultData;
 
         public AdultController(IAdultData adultData)
         {
@@ -56,9 +56,9 @@ namespace FamilyWepApi.Controllers
                     adultsToShow = adults.Where(a => a.Age == age).ToList();
                     return adultsToShow;
                 }*/
-               // else
+                // else
                 //{
-                    return Ok(adults);
+                return Ok(adults);
                 
                     
             }
@@ -104,15 +104,15 @@ namespace FamilyWepApi.Controllers
                 return StatusCode(500, e.Message);
             }
         }
-
+        
         [HttpPatch]
         [Route("{id:int}")]
-        public async Task<ActionResult<Adult>> UpdateAdult([FromRoute] int? id, [FromBody] Adult adult)
+        public async Task<ActionResult<Adult>> UpdateAdult([FromForm] Adult adult) 
         {
             try
             {
-                Adult updatedAdult = await adultData.UpdateAdult(adult);
-                return Ok(updatedAdult);
+                Adult adultToUpdate = await adultData.UpdateAdult(adult);
+                return Ok(adultToUpdate);
             }
             catch (Exception e)
             {

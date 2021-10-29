@@ -96,7 +96,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        allFamilies = FamilyData.GetFamilies();
+        allFamilies = await FamilyData.GetFamilies();
         familiesToShow = allFamilies;
     }
 
@@ -110,7 +110,7 @@ else
         NavigationManager.NavigateTo($"EditFamily/{id}");
     }
 
-    private void RemoveFamily(int familyId)
+    private async Task RemoveFamily(int familyId)
     {
         Family familyToRemove = allFamilies.First(f => f.Id == familyId);
         FamilyData.RemoveFamily(familyId);

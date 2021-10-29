@@ -1,33 +1,73 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
 using FamilyWepApi.Models;
 
 namespace FamilyWepApi.Data.Impl
 {
     public class FamilyData : IFamilyData
     {
-        public IList<Family> GetFamilies()
+        private string familyFile = "families.json";
+        private IList<Family> families = new List<Family>();
+        
+        public FamilyData()
         {
-            throw new System.NotImplementedException();
+            if (!File.Exists(familyFile))
+            {
+                WriteFamiliesToFile();
+            }
+            else
+            {
+                string content = File.ReadAllText(familyFile);
+                families = JsonSerializer.Deserialize<List<Family>>(content);
+            }
         }
 
-        public void AddFamily(Family family)
+        public async Task<IList<Family>> GetFamilies()
         {
-            throw new System.NotImplementedException();
+            List<Family> fl = new List<Family>(families);
+            return fl;
         }
 
-        public void RemoveFamily(int familyId)
+        public async Task<Family> AddFamily(Family family)
         {
-            throw new System.NotImplementedException();
+            int max = families.Max(family => family.Id);
+            family.Id = (++max);
+            families.Add(family);
+            WriteFamiliesToFile();
+            return family;
         }
 
-        public void UpdateFamily(Family family)
+        public async Task RemoveFamily(int familyId)
         {
-            throw new System.NotImplementedException();
+            Family familyToRemove = families.First(f => f.Id == familyId);
+            families.Remove(familyToRemove);
+            WriteFamiliesToFile();
         }
 
-        public Family Get(int familyId)
+        public async Task<Family> UpdateFamily(Family family)
         {
-            throw new System.NotImplementedException();
+            Family toUpdate = families.First(f => f.Id == family.Id);
+            toUpdate.StreetName = family.StreetName;
+            toUpdate.HouseNumber = family.HouseNumber;
+            toUpdate.Adults = family.Adults;
+            toUpdate.Children = family.Children;
+            toUpdate.Pets = family.Pets;
+            WriteFamiliesToFile();
+            return family;
+        }
+
+        public async Task<Family> Get(int familyId)
+        {
+            return families.FirstOrDefault(f => f.Id == familyId);
+        }
+
+        private void WriteFamiliesToFile()
+        {
+            string familiesAsJson = JsonSerializer.Serialize(families);
+            File.WriteAllText(familyFile, familiesAsJson);
         }
     }
 }

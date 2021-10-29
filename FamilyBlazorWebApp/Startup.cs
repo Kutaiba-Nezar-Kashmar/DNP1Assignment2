@@ -33,7 +33,7 @@ namespace FamilyBlazorWebApp
             services.AddServerSideBlazor();
             services.AddScoped<IUserService, UserServiceAsync>();
             services.AddScoped<IAdultData, AdultDataAsync>();
-            services.AddScoped<IFamilyData, FamilyData>();
+            services.AddScoped<IFamilyData, FamilyDataAsync>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
         }

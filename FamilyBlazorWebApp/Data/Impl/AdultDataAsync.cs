@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -56,10 +57,11 @@ namespace FamilyBlazorWebApp.Data.Impl
         public async Task UpdateAdult(Adult adult)
         {
             using HttpClient client = new HttpClient();
-            string newAdult = JsonSerializer.Serialize(adult);
-            StringContent content = new StringContent(newAdult, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage  response = await client.PatchAsync(uri + $"/Adult/{adult.Id}", content);
+            string adultAsJson = JsonSerializer.Serialize(adult);
+            HttpContent content = new StringContent(adultAsJson,
+                Encoding.UTF8,
+                "application/json");
+            HttpResponseMessage response = await client.PatchAsync($"{uri}/Adult/{adult.Id}", content);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Error, {response.StatusCode}, {response.ReasonPhrase}");

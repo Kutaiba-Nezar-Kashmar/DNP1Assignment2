@@ -10,10 +10,7 @@
         <h3>You have to <a href="Login">login</a> in order to view this page!!!</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
-        <EditForm Model="@newFamily" OnValidSubmit="@AddNewFamily">
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
-            <div class="familyBox">
+        <div class="familyBox">
                 <br/>
                 <p class="WelcomeMessageCreate">New Family</p>
                 <div class="addBox">
@@ -110,10 +107,9 @@
                 </div>
                 <br/>
                 <div class="d-flex justify-content-center AddFBu">
-                    <a class="submit" type="submit">Add Family</a>
+                    <a class="submit" type="submit" @onclick="AddNewFamily">Add Family</a>
                 </div>
             </div>
-        </EditForm>
     </Authorized>
 </AuthorizeView>
 
@@ -125,13 +121,13 @@
     private Child newChild = new Child() {Interests = new List<Interest>(), Pets = new List<Pet>()};
     private Family newFamily = new Family() {Adults = new List<Adult>(), Children = new List<Child>(), Pets = new List<Pet>()};
     
-    private void AddNewFamily()
+    private async Task AddNewFamily()
     {
         newFamily.Adults.Add(newAdult);
         newChild.Interests.Add(newInterest);
         newChild.Pets.Add(newPet);
         newFamily.Children.Add(newChild);
-        FamilyData.AddFamily(newFamily);
+        await FamilyData.AddFamily(newFamily);
         NavigationManager.NavigateTo("/Family");
     }
 }

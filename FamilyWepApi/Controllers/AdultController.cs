@@ -108,7 +108,7 @@ namespace FamilyWepApi.Controllers
         
         [HttpPatch]
         [Route("{id:int}")]
-        public async Task<ActionResult<Adult>> UpdateAdult([FromForm] Adult adult) 
+        public async Task<ActionResult<Adult>> UpdateAdult([FromBody] Adult adult) 
         {
             try
             {

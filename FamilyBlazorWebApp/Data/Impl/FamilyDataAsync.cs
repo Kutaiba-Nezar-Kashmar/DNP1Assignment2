@@ -59,9 +59,9 @@ namespace FamilyBlazorWebApp.Data.Impl
         {
             using HttpClient client = new HttpClient();
             string newFamily = JsonSerializer.Serialize(family);
-            StringContent content = new StringContent(newFamily, Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(newFamily, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await client.PatchAsync(uri + $"/Family/{family.Id}", content);
+            HttpResponseMessage responseMessage = await client.PatchAsync($"{uri}/Family/{family.Id}", content);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 throw new Exception($@"Error: {responseMessage.StatusCode}, {responseMessage.ReasonPhrase}");

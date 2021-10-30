@@ -154,7 +154,7 @@ else
     private IList<Pet> pets { get; set; }
     private IList<Interest> interests { get; set; }
 
-    private Family familyMembersToShow = new Family(){Adults = new List<Adult>(), Children = new List<Child>(), Pets = new List<Pet>()};
+    private Family familyMembersToShow;
 
     protected override async Task OnInitializedAsync()
     {

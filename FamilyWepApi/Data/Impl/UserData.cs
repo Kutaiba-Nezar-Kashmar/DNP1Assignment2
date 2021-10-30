@@ -31,13 +31,6 @@ namespace FamilyWepApi.Data.Impl
             writeToJson();
             return user;
         }
-
-        public async Task<IList<User>> AllUsers()
-        {
-            List<User> ul = new List<User>(users);
-            return ul;
-        }
-
         public async Task<User> ValidateUser(string userName, string password)
         {
             User first = users.FirstOrDefault(user => user.UserName.Equals(userName));

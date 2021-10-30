@@ -56,7 +56,7 @@ namespace FamilyWepApi.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        public async Task<ActionResult> RemoceFamily([FromRoute] int id)
+        public async Task<ActionResult> RemoveFamily([FromRoute] int id)
         {
             try
             {

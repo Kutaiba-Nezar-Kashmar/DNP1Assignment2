@@ -17,7 +17,7 @@ namespace FamilyWepApi.Data.Impl
         {
             if (!File.Exists(adultFile))
             {
-                WriteTodosToFile();
+                writeToJson();
             }
             else
             {
@@ -37,7 +37,7 @@ namespace FamilyWepApi.Data.Impl
             int max = adults.Max(adult => adult.Id);
             adult.Id = (++max);
             adults.Add(adult);
-            WriteTodosToFile();
+            writeToJson();
             return adult;
         }
 
@@ -45,7 +45,7 @@ namespace FamilyWepApi.Data.Impl
         {
             Adult adultToRemove = adults.First(a => a.Id == adultId);
             adults.Remove(adultToRemove);
-            WriteTodosToFile();
+            writeToJson();
         }
 
         public async Task<Adult> UpdateAdult(Adult adult)
@@ -65,7 +65,7 @@ namespace FamilyWepApi.Data.Impl
             toUpdate.Sex = adult.Sex;
             toUpdate.JobTitle.JobTitle = adult.JobTitle.JobTitle;
             toUpdate.JobTitle.Salary = adult.JobTitle.Salary;
-            WriteTodosToFile();
+            writeToJson();
             return adult;
         }
 
@@ -74,7 +74,7 @@ namespace FamilyWepApi.Data.Impl
             return adults.FirstOrDefault(a => a.Id == adultId);
         }
         
-        private void WriteTodosToFile()
+        private void writeToJson()
         {
             string adultsAsJson = JsonSerializer.Serialize(adults);
             File.WriteAllText(adultFile, adultsAsJson);
